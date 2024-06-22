@@ -2,7 +2,6 @@ package uz.lee.onlineshoop.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +20,7 @@ public class UserEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private RoleEntity role;
-    private String full_name;
+    private String username;
     private String email;
     private String password;
     private String sent_code;

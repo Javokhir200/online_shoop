@@ -6,5 +6,5 @@ import uz.lee.onlineshoop.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity,Long> {
-    UserEntity findByFullNameAndPassword(String fullName, String password);
+    UserEntity findByUsernameAndPassword(String username, String password);
 }

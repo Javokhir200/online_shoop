@@ -12,7 +12,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
     public UserEntity authenticate(String fullName, String password) {
-        UserEntity user = userRepository.findByFullNameAndPassword(fullName, password);
+        UserEntity user = userRepository.findByUsernameAndPassword(fullName, password);
         if(user != null && user.getPassword().equals(password)) {
             return user;
         }
