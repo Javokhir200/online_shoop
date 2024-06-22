@@ -17,7 +17,9 @@ public class UserController {
     }
     @PostMapping()
     public ResponseEntity<?> createUser(@RequestBody UserEntity user) {
-        userService.authenticate(user.getFull_name(), user.getPassword());
+        if(user == null) {
+            return ResponseEntity.status(400).body("Something is null!");
+        }
         return ResponseEntity.ok(userRepository.save(user));
     }
     @PostMapping()
