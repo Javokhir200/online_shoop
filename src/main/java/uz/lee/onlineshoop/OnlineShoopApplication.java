@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OnlineShoopApplication {
 
     public static void main(String[] args) {
+        System.out.println("nimaifdr");
         SpringApplication.run(OnlineShoopApplication.class, args);
     }
 
