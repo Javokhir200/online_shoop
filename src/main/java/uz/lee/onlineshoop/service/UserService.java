@@ -13,15 +13,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserEntity register(UserEntity user) throws Exception {
-        // Ro'yxatdan o'tkazish logikasi (masalan, foydalanuvchini tekshirish va saqlash)
-        if (userRepository.findByFullName(user.getFull_name()) != null) {
-            throw new Exception("User already exists");
-        }
-        return userRepository.save(user);
-    }
-
     public UserEntity authenticate(String fullName, String password) {
-        return userRepository.findByFullNameAndPassword(fullName, password);
+        UserEntity user = userRepository.findByFullNameAndPassword(fullName, password);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
     }
 }

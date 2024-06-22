@@ -20,16 +20,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserEntity user) throws Exception {
-            UserEntity registeredUser = userService.register(user);
-            return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
+    public ResponseEntity<?> register(@RequestBody UserEntity user)  {
+            return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserEntity loginRequest) {
-            String fullName = loginRequest.getFull_name();
+            String fullName = loginRequest.getFullName();
             String password = loginRequest.getPassword();
-            //fullname va password orqali tekshiradi
             UserEntity user = userService.authenticate(fullName, password);
             if (user != null) {
                 return ResponseEntity.ok("Login successful");
