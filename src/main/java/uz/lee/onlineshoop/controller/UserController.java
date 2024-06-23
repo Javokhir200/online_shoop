@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserEntity loginRequest) {
-            String fullName = loginRequest.getFullName();
+            String fullName = loginRequest.getFull_name();
             String password = loginRequest.getPassword();
             UserEntity user = userService.authenticate(fullName, password);
             if (user != null) {
