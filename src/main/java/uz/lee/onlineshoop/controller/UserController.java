@@ -2,10 +2,7 @@ package uz.lee.onlineshoop.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.lee.onlineshoop.entity.UserEntity;
 import uz.lee.onlineshoop.repository.UserRepository;
 import uz.lee.onlineshoop.service.UserService;
@@ -28,10 +25,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserEntity user) {
-            String fullName = user.getFull_name();
-            String password = user.getPassword();
-            UserEntity entity = userService.authenticate(fullName, password);
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+            UserEntity entity = userService.authenticate(username, password);
             if (entity != null) {
                 return ResponseEntity.ok("Login successful");
             }
