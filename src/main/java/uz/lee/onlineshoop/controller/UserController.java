@@ -25,11 +25,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserEntity loginRequest) {
-            String fullName = loginRequest.getFull_name();
-            String password = loginRequest.getPassword();
-            UserEntity user = userService.authenticate(fullName, password);
-            if (user != null) {
+    public ResponseEntity<?> login(@RequestBody UserEntity user) {
+            String fullName = user.getFull_name();
+            String password = user.getPassword();
+            UserEntity entity = userService.authenticate(fullName, password);
+            if (entity != null) {
                 return ResponseEntity.ok("Login successful");
             }
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid full name or password");
