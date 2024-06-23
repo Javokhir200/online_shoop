@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uz.lee.onlineshoop.entity.UserEntity;
+import uz.lee.onlineshoop.repository.UserRepository;
 import uz.lee.onlineshoop.service.UserService;
 
 @RestController
@@ -14,14 +15,16 @@ import uz.lee.onlineshoop.service.UserService;
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
+    private final UserRepository userRepository;
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserEntity user)  {
-            return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        UserEntity entity = userRepository.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(entity);
     }
 
     @PostMapping("/login")
