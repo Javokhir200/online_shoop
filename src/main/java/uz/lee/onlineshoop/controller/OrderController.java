@@ -28,7 +28,7 @@ public class OrderController {
         if(order == null) {
             return ResponseEntity.status(400).body("Something is null!");
         }
-        URI uri = new URI("/api/chat/create");
+        URI uri = new URI("/api/orders");
         orderService.saveOrder(order);
         return ResponseEntity.created(uri).build();
     }
