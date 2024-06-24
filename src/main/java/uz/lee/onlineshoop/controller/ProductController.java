@@ -17,24 +17,24 @@ public class ProductController {
     public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<List<ProductEntity>> getAll() {
         return ResponseEntity.ok(productRepository.findAll());
     }
-    @GetMapping("/get{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(productRepository.findById(id));
     }
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody ProductEntity entity) throws URISyntaxException {
         if(entity == null) {
             return ResponseEntity.status(500).body("Something is null!");
         }
         ProductEntity product = productRepository.save(entity);
-        URI uri = new URI("/create" + product.getId());
+        URI uri = new URI("/api/products/" + product.getId());
         return ResponseEntity.created(uri).body(product);
     }
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteByName(@PathVariable("id") Long id) {
         if(!productRepository.existsById(id)) {
             return ResponseEntity.status(404).body("Not found product with id - " + id);

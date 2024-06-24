@@ -1,6 +1,5 @@
 package uz.lee.onlineshoop.controller;
 
-import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.lee.onlineshoop.entity.Chat;
@@ -20,14 +19,14 @@ public class ChatController {
         this.chatRepository = chatRepository;
         this.chatService = chatService;
     }
-    @PostMapping("/create")
+    @PostMapping("")
     public ResponseEntity<?> create(@RequestBody Chat chat) throws URISyntaxException {
         chat.setCreatedAt(LocalDateTime.now());
         Chat savedChat = chatService.saveChat(chat);
-        URI uri = new URI("/api/chat/create" + savedChat.getId());
+        URI uri = new URI("/api/chat/" + savedChat.getId());
         return ResponseEntity.created(uri).build();
     }
-    @GetMapping("/get{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         if (!chatRepository.existsById(id)) {
             return ResponseEntity.status(404).body("Not found with id - " + id);
