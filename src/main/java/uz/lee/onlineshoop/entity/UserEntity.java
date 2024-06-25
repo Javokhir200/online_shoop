@@ -22,14 +22,14 @@ public class UserEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private RoleEntity role;
-    private String full_name;
+    private String fullName;
     private String email;
     private String password;
-    private String sent_code;
+    private String sentCode;
     private String gender;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attachment_id")
     private Attachment attachment;
-    private String card_number;
-    private String phone_number;
+    private String cardNumber;
+    private String phoneNumber;
 }
