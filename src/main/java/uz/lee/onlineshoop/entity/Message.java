@@ -31,6 +31,6 @@ public class Message {
     private Chat chat;
     @CreationTimestamp
     private LocalDateTime createdAt;
-    private boolean is_read;
+    private boolean read;
     private String text;
 }
