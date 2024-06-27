@@ -30,7 +30,7 @@ public class AttachmentController {
             return ResponseEntity.status(400).body("Something went wrong!");
         }
         URI uri = new URI("/api/attachments/" + attachment.getId());
-        Attachment save = repository.save(attachment);
+        Attachment save = service.saveAttachment(attachment);
         return ResponseEntity.created(uri).body(save);
     }
     @GetMapping("/{id}")

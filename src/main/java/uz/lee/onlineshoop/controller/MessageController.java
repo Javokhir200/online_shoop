@@ -3,7 +3,6 @@ package uz.lee.onlineshoop.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.lee.onlineshoop.entity.Message;
-import uz.lee.onlineshoop.repository.MessageRepository;
 import uz.lee.onlineshoop.service.MessageService;
 
 import java.net.URI;

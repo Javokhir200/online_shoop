@@ -14,7 +14,7 @@ public class UserService {
     }
 
     public UserEntity authenticate(String fullName, String password) {
-        UserEntity user = userRepository.findByFull_nameAndPassword(fullName, password);
+        UserEntity user = userRepository.findByFullNameAndPassword(fullName, password);
         if (user != null && user.getPassword().equals(password)) {
             return user;
         }

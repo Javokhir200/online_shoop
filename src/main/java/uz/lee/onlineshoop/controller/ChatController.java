@@ -19,7 +19,7 @@ public class ChatController {
         this.chatRepository = chatRepository;
         this.chatService = chatService;
     }
-    @PostMapping("")
+    @PostMapping()
     public ResponseEntity<?> create(@RequestBody Chat chat) throws URISyntaxException {
         chat.setCreatedAt(LocalDateTime.now());
         Chat savedChat = chatService.saveChat(chat);
