@@ -3,6 +3,9 @@ package uz.lee.onlineshoop.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.lee.onlineshoop.dto.AttachmentDto;
+import uz.lee.onlineshoop.dto.RoleDto;
+import uz.lee.onlineshoop.dto.UserDto;
 import uz.lee.onlineshoop.entity.UserEntity;
 import uz.lee.onlineshoop.repository.UserRepository;
 import uz.lee.onlineshoop.service.UserService;
@@ -20,15 +23,16 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserEntity user)  {
-        UserEntity entity = userRepository.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(entity);
+        UserDto save = userService.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(save);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<?> login(@RequestParam String username,
+                                   @RequestParam String password) {
             UserEntity entity = userService.authenticate(username, password);
             if (entity != null) {
-                return ResponseEntity.ok("Login successful");
+                return ResponseEntity.ok("Login successful!");
             }
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid full name or password");
     }
