@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * IT HAS A BUG
+ * IT HAS A BUG!
  */
 @Service
 public class MessageService {
