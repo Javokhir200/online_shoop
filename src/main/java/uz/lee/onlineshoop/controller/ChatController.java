@@ -1,5 +1,7 @@
 package uz.lee.onlineshoop.controller;
 
+import lombok.SneakyThrows;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.lee.onlineshoop.dto.*;
@@ -20,17 +22,20 @@ public class ChatController {
         this.chatService = chatService;
     }
     @PostMapping()
-    public ResponseEntity<?> create(@RequestBody Chat chat) throws URISyntaxException {
+    public ResponseEntity<?> create(@RequestBody ChatDto chat) throws URISyntaxException {
         chat.setCreatedAt(LocalDateTime.now());
         ChatDto savedChat = chatService.saveChat(chat);
         URI uri = new URI("/api/chat/" + savedChat.getId());
         return ResponseEntity.created(uri).body(savedChat);
     }
+    @SneakyThrows
     @GetMapping("/{id}")
+    @Cacheable(value = "chats",key = "#id")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         if (!chatRepository.existsById(id)) {
             return ResponseEntity.status(404).body("Not found with id - " + id);
         }
+        Thread.sleep(5000);
         ChatDto chatDto = chatService.getById(id);
         return ResponseEntity.ok(chatDto);
     }

@@ -17,18 +17,13 @@ public class AttachmentService {
     public List<Attachment> getAllAttachment() {
         return repository.findAll();
     }
-    public AttachmentDto saveAttachment(Attachment attachment) {
+    public AttachmentDto saveAttachment(AttachmentDto attachment) {
         if(attachment == null) {
             return null;
         }
-        repository.save(attachment);
-        return new AttachmentDto(
-                attachment.getId(),
-                attachment.getOriginalName(),
-                attachment.getDescription(),
-                attachment.getSubmittedName(),
-                attachment.getFileUrl()
-        );
+        Attachment attachment1 = getAttachment(attachment);
+        repository.save(attachment1);
+        return attachment;
     }
     public AttachmentDto getById(Long id) {
         Attachment attachment = repository.findById(id).orElseThrow(
@@ -39,6 +34,15 @@ public class AttachmentService {
                 attachment.getDescription(),
                 attachment.getSubmittedName(),
                 attachment.getFileUrl()
+        );
+    }
+    private static Attachment getAttachment(AttachmentDto dto) {
+        return new Attachment(
+                dto.getId(),
+                dto.getOriginalName(),
+                dto.getDescription(),
+                dto.getSubmittedName(),
+                dto.getFileUrl()
         );
     }
 }

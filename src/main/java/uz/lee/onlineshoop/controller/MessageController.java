@@ -1,5 +1,7 @@
 package uz.lee.onlineshoop.controller;
 
+import lombok.SneakyThrows;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.lee.onlineshoop.dto.MessageDto;
@@ -16,8 +18,11 @@ public class MessageController {
     public MessageController(MessageService messageService) {
         this.messageService = messageService;
     }
+    @SneakyThrows
     @GetMapping()
+    @Cacheable("messages")
     public ResponseEntity<?> getAll() {
+        Thread.sleep(5000);
         return ResponseEntity.ok(messageService.getAllMessages());
     }
     @PostMapping()
