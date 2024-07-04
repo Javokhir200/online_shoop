@@ -1,4 +1,3 @@
-
 package uz.lee.onlineshoop.entity;
 
 import jakarta.persistence.*;
