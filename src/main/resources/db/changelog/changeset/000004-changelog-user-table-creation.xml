@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="4" author="stranger">
+        <sql>
+            CREATE TABLE users
+            (
+                id            BIGINT PRIMARY KEY,
+                created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                role_id       BIGINT,
+                full_name     VARCHAR(255),
+                email         VARCHAR(255) UNIQUE,
+                password      VARCHAR(255),
+                sent_code     VARCHAR(255),
+                gender        VARCHAR(10),
+                attachment_id BIGINT,
+                card_number   VARCHAR(20),
+                phone_number  VARCHAR(20),
+                FOREIGN KEY (role_id) REFERENCES role (id),
+                FOREIGN KEY (attachment_id) REFERENCES attachment (id)
+            )
+        </sql>
+    </changeSet>
+</databaseChangeLog>

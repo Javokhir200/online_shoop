@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="13" author="stranger">
+        <sql>
+            CREATE TABLE comment
+            (
+                id          BIGINT PRIMARY KEY ,
+                user_id     BIGINT,
+                product_id  BIGINT,
+                text        VARCHAR(255),
+                created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                stars_count INT,
+                FOREIGN KEY (user_id) REFERENCES users (id),
+                FOREIGN KEY (product_id) REFERENCES products (id)
+            )
+        </sql>
+    </changeSet>
+</databaseChangeLog>

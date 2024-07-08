@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="10" author="stranger">
+        <sql>
+            CREATE TABLE payment_method
+            (
+                id          BIGINT PRIMARY KEY ,
+                method      VARCHAR(255),
+                description VARCHAR(255)
+            )
+        </sql>
+    </changeSet>
+</databaseChangeLog>

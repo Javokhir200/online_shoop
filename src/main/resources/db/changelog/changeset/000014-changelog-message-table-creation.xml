@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="14" author="stranger">
+        <sql>
+            CREATE TABLE message
+            (
+                id            BIGINT PRIMARY KEY ,
+                attachment_id BIGINT,
+                from_store    BOOLEAN,
+                chat_id       BIGINT,
+                created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                read          BOOLEAN,
+                text          VARCHAR(255),
+                FOREIGN KEY (attachment_id) REFERENCES attachment (id),
+                FOREIGN KEY (chat_id) REFERENCES chat (id)
+            )
+        </sql>
+    </changeSet>
+</databaseChangeLog>
