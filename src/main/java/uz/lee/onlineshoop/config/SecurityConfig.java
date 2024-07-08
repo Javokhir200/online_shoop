@@ -19,9 +19,11 @@ import uz.lee.onlineshoop.filter.JwtAuthenticationFilter;
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final CustomUserDetails customUserDetails;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, CustomUserDetails customUserDetails) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.customUserDetails = customUserDetails;
     }
 
     @Bean
@@ -29,6 +31,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
+                .userDetailsService(customUserDetails)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated())

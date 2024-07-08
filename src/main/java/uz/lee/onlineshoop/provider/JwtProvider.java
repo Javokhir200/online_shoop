@@ -33,11 +33,11 @@ public class JwtProvider {
         String roleName = role != null ? role.getName() : "";
 
         return Jwts.builder()
-                .setSubject(user.getEmail())
+//                .setSubject(user.getEmail())
                 .setIssuedAt(new Date())
                 .claim("id", user.getId())
-                .claim("username", user.getFullName())
-                .claim("roles", roleName)
+                .claim("email", user.getEmail())
+                .claim("role", roleName)
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(key)
                 .compact();
