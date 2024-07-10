@@ -24,26 +24,47 @@ public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
+
+    @Column(unique = true)
+    private String username;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private RoleEntity role;
+
     private String fullName;
+
+    @Column(unique = true)
     private String email;
+
     private String password;
-    private String sentCode;
-    private String gender;
+
+    private String verificationCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "gender_id")
+    private GenderEntity gender;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attachment_id")
     private Attachment attachment;
+
     private String cardNumber;
+
     private String phoneNumber;
 
+
     private Boolean enabled = false;
+
     private Boolean accountNonExpired = true;
+
     private Boolean accountNonLocked = true;
+
     private Boolean credentialsNonExpired = true;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.lee.onlineshoop.dto.user.UserDto;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +16,6 @@ public class MessageDto {
     private Long id;
     private AttachmentDto attachment;
     private UserDto user;
-    private ChatDto chat;
     private LocalDateTime createdAt;
     private boolean isRead;
     private String text;

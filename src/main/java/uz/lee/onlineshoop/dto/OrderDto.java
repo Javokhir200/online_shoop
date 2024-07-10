@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.lee.onlineshoop.dto.product.ProductDto;
+import uz.lee.onlineshoop.dto.user.UserDto;
 
 
 @AllArgsConstructor

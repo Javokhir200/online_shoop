@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "attachment")
 public class Attachment {
@@ -17,7 +17,12 @@ public class Attachment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String originalName;
-    private String description;
+    @ManyToOne
+    private ProductEntity product;
     private String submittedName;
-    private String fileUrl;
+
+    public Attachment(String originalName, String submittedName) {
+        this.originalName = originalName;
+        this.submittedName = submittedName;
+    }
 }

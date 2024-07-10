@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: OnlineShoop
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: javokhir.nw@gmail.com
+    password: igtvuthafcpjgnsm
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  datasource:
+    password: 19792004
+    username: nollon
+    url: jdbc:postgresql://localhost:5432/website
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans=true:
+        format_sql: true
+jwt:
+  token:
+    expiration:
+      mills: 10_000
+    secret:
+      key: thisissecretkeytttttttttttttttttttttt

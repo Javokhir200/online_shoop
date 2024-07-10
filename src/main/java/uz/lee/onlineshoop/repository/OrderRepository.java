@@ -6,5 +6,4 @@ import uz.lee.onlineshoop.entity.OrderEntity;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity,Long> {
-    boolean existsById(Long id);
 }

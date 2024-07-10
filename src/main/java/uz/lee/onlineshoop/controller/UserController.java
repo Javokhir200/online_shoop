@@ -1,39 +1,25 @@
 package uz.lee.onlineshoop.controller;
 
-import org.springframework.http.HttpStatus;
+import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.lee.onlineshoop.dto.AttachmentDto;
-import uz.lee.onlineshoop.dto.RoleDto;
-import uz.lee.onlineshoop.dto.UserDto;
-import uz.lee.onlineshoop.entity.UserEntity;
-import uz.lee.onlineshoop.repository.UserRepository;
+import uz.lee.onlineshoop.dto.ApiResponse;
+import uz.lee.onlineshoop.dto.user.EditByUserDto;
 import uz.lee.onlineshoop.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserEntity user)  {
-        UserDto save = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(save);
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> editUser(@RequestBody EditByUserDto userDto, @PathVariable Long userId){
+         ApiResponse resp = userService.editByUser(userId,userDto);
+         return ResponseEntity.status(resp.isSuccess()?200:400).body(resp);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username,
-                                   @RequestParam String password) {
-            UserEntity entity = userService.authenticate(username, password);
-            if (entity != null) {
-                return ResponseEntity.ok("Login successful!");
-            }
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid full name or password");
-    }
 }

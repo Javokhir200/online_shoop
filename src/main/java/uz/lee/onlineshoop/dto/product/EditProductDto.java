@@ -1,4 +1,4 @@
-package uz.lee.onlineshoop.dto;
+package uz.lee.onlineshoop.dto.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,12 +9,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProductDto {
-    private Long id;
+public class EditProductDto {
     private String name;
-    private TypeDto type;
-    private String price;
+    private int typeId;
+    private Double price;
     private Integer count;
-    private StoreDto store;
     private String description;
 }

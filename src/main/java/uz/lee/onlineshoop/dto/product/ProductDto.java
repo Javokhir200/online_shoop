@@ -1,21 +1,19 @@
-package uz.lee.onlineshoop.dto;
+package uz.lee.onlineshoop.dto.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.lee.onlineshoop.dto.user.UserDto;
-
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class StoreDto {
-    private Long id;
+public class ProductDto {
     private String name;
+    private int typeId;
+    private Double price;
+    private Integer count;
+    private int storeId;
     private String description;
-    private UserDto user;
-    private LocalDateTime createdAt;
 }

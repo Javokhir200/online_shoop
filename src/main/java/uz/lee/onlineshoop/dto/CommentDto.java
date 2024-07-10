@@ -12,10 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class CommentDto {
-    private Long id;
-    private UserDto user;
-    private ProductDto product;
+    private long productId;
     private String text;
-    private LocalDateTime createdAt;
     private Integer starsCount;
 }

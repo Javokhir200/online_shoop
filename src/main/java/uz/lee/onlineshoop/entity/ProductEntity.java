@@ -21,7 +21,7 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private Type type;
-    private String price;
+    private Double price;
     private Integer count;
     @ManyToOne
     @JoinColumn(name = "store_id")
