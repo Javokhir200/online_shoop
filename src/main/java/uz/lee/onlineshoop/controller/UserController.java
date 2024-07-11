@@ -22,4 +22,6 @@ public class UserController {
          return ResponseEntity.status(resp.isSuccess()?200:400).body(resp);
     }
 
+
+    //getByID
 }

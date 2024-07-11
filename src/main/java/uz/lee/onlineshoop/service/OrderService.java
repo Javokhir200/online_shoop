@@ -14,16 +14,13 @@ import uz.lee.onlineshoop.util.StatusConstants;
 public class OrderService {
 
     private final AddressEntityRepository addressEntityRepository;
-    private final PaymentMethodRepository paymentMethodRepository;
     private final UserEntityRepository userEntityRepository;
     private final StatusRepository statusRepository;
 
     public OrderService(AddressEntityRepository addressEntityRepository,
-                        PaymentMethodRepository paymentMethodRepository,
                         UserEntityRepository userEntityRepository,
                         StatusRepository statusRepository) {
         this.addressEntityRepository = addressEntityRepository;
-        this.paymentMethodRepository = paymentMethodRepository;
         this.userEntityRepository = userEntityRepository;
         this.statusRepository = statusRepository;
     }
@@ -42,7 +39,6 @@ public class OrderService {
 
         orderEntity.setAddress(addressEntity);
         orderEntity.setProduct(orderEntity.getProduct());
-        orderEntity.setPaymentMethod(paymentMethodRepository.getReferenceById(orderDto.getPaymentMethodId()));
         orderEntity.setQuantity(orderDto.getQuantity());
         orderEntity.setTotalPrice(orderDto.getTotalPrice());
         orderEntity.setUser(userEntityRepository.getReferenceById(user.getId()));

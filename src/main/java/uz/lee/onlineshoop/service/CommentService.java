@@ -2,6 +2,7 @@ package uz.lee.onlineshoop.service;
 
 import org.springframework.stereotype.Service;
 import uz.lee.onlineshoop.dto.*;
+import uz.lee.onlineshoop.entity.Category;
 import uz.lee.onlineshoop.entity.Comment;
 import uz.lee.onlineshoop.entity.ProductEntity;
 import uz.lee.onlineshoop.repository.CommentRepository;
@@ -39,5 +40,24 @@ public class CommentService {
         return comments.map(
                 o -> new ApiResponse(true, "List of Comments", o))
                 .orElseGet(() -> new ApiResponse(false, "No comments"));
+    }
+
+    public ApiResponse updateComment(Long id, CommentDto commentDto) {
+        Optional<Comment> optionalComment = commentRepository.findById(id);
+        if (!optionalComment.isPresent()) {
+            return new ApiResponse(false, "Comment not found");
+        }
+        Comment existingComment = optionalComment.get();
+
+        existingComment.setText(commentDto.getText());
+        existingComment.setStarsCount(commentDto.getStarsCount());
+
+        commentRepository.save(existingComment);
+        return new ApiResponse(true, "Comment updated successfully");
+    }
+
+    public ApiResponse deleteComment(Long id) {
+        commentRepository.deleteById(id);
+        return new ApiResponse(true, "Comment deleted successfully");
     }
 }

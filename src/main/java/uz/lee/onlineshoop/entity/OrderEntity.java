@@ -40,7 +40,4 @@ public class OrderEntity {
     private Status status;
     @Column(name = "total_price")
     private String totalPrice;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_method_id")
-    private PaymentMethod paymentMethod;
 }

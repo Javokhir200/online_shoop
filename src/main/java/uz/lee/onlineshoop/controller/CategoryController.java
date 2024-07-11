@@ -21,25 +21,25 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<?> getAll(){
-        ApiResponse resp = categoryService.getAll();;
+        ApiResponse resp = categoryService.getAll();
         return ResponseEntity.status(resp.isSuccess()?200:400).body(resp);
     }
 
     @PostMapping
     public ResponseEntity<?> addCategory(@RequestBody CategoryDto categoryDto){
-        ApiResponse resp = categoryService.getAll();
+        ApiResponse resp = categoryService.addCategory(categoryDto);
         return ResponseEntity.status(resp.isSuccess()?200:400).body(resp);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCategory(@RequestBody CategoryDto categoryDto,@PathVariable Integer id){
-        ApiResponse resp = categoryService.getAll();
+    public ResponseEntity<?> updateCategory(@RequestBody CategoryDto categoryDto,@PathVariable Long id){
+        ApiResponse resp = categoryService.updateCategory(id,categoryDto);
         return ResponseEntity.status(resp.isSuccess()?200:400).body(resp);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> addCategory(@PathVariable Integer id){
-        ApiResponse resp = categoryService.getAll();
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id){
+        ApiResponse resp = categoryService.deleteCategory(id);
         return ResponseEntity.status(resp.isSuccess()?200:400).body(resp);
     }
 }
