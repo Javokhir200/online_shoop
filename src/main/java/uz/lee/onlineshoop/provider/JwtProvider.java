@@ -33,7 +33,7 @@ public class JwtProvider {
         String roleName = role != null ? role.getName() : "";
 
         return Jwts.builder()
-//                .setSubject(user.getEmail())
+                .setSubject(user.getUsername())
                 .setIssuedAt(new Date())
                 .claim("id", user.getId())
                 .claim("email", user.getEmail())

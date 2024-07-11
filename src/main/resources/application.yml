@@ -32,6 +32,6 @@ spring:
 jwt:
   token:
     expiration:
-      mills: 10_000
+      mills: 10_000_000
     secret:
       key: thisissecretkeytttttttttttttttttttttt

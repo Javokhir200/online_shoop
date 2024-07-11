@@ -1,17 +1,16 @@
 package uz.lee.onlineshoop.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 @Table(name = "attachment")
+@AllArgsConstructor
 public class Attachment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +20,4 @@ public class Attachment {
     private ProductEntity product;
     private String submittedName;
 
-    public Attachment(String originalName, String submittedName) {
-        this.originalName = originalName;
-        this.submittedName = submittedName;
-    }
 }

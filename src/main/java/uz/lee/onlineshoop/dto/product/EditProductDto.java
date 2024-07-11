@@ -13,6 +13,5 @@ public class EditProductDto {
     private String name;
     private int typeId;
     private Double price;
-    private Integer count;
     private String description;
 }

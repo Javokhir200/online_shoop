@@ -1,8 +1,6 @@
 package uz.lee.onlineshoop.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 import uz.lee.onlineshoop.dto.ApiResponse;
 import uz.lee.onlineshoop.dto.user.EditByUserDto;
 import uz.lee.onlineshoop.entity.UserEntity;

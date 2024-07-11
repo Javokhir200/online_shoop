@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Setter
 public class MessageDto {
     private Long id;
-    private AttachmentDto attachment;
     private UserDto user;
     private LocalDateTime createdAt;
     private boolean isRead;

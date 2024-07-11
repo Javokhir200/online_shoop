@@ -1,22 +1,30 @@
 package uz.lee.onlineshoop.service;
 
 
+import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import uz.lee.onlineshoop.dto.ApiResponse;
 import uz.lee.onlineshoop.dto.product.EditProductDto;
 import uz.lee.onlineshoop.dto.product.ProductDto;
+import uz.lee.onlineshoop.entity.Attachment;
 import uz.lee.onlineshoop.entity.ProductEntity;
 import uz.lee.onlineshoop.entity.StoreEntity;
 import uz.lee.onlineshoop.entity.Type;
+import uz.lee.onlineshoop.repository.AttachmentRepository;
 import uz.lee.onlineshoop.repository.TypeRepository;
 import uz.lee.onlineshoop.repository.ProductRepository;
 import uz.lee.onlineshoop.repository.StoreEntityRepository;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -26,13 +34,17 @@ public class ProductService {
 
     private final int DEFAULT_PAGE = 1;
     private final int DEFAULT_SIZE = 10;
+    private final String BASE_PATH = "C:/Users/Javokhir/Desktop/BAZA/";
+    private final AttachmentRepository attachmentRepository;
 
     public ProductService(ProductRepository productRepository,
                           StoreEntityRepository storeEntityRepository,
-                          TypeRepository typeRepository) {
+                          TypeRepository typeRepository,
+                          AttachmentRepository attachmentRepository) {
         this.productRepository = productRepository;
         this.storeEntityRepository = storeEntityRepository;
         this.typeRepository = typeRepository;
+        this.attachmentRepository = attachmentRepository;
     }
 
     public ApiResponse getProducts(Integer page,Integer size) {
@@ -52,11 +64,13 @@ public class ProductService {
         Optional<ProductEntity> byId = productRepository.findById(id);
         if (byId.isPresent()){
             ProductEntity product = byId.get();
+
             return new ApiResponse(true,"product: " + product.getId(),product);
         }
         return new ApiResponse(false,"Product is not exist in this id");
     }
 
+    @SneakyThrows
     public ApiResponse saveProduct(ProductDto productDto) {
         ProductEntity product = new ProductEntity();
         Optional<StoreEntity> store = storeEntityRepository.findById(productDto.getStoreId());
@@ -73,11 +87,26 @@ public class ProductService {
         product.setStore(store.get());
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
-        product.setCount(productDto.getCount());
         product.setPrice(productDto.getPrice());
         product.setType(type.get());
+        product = productRepository.save(product);
 
-        productRepository.save(product);
+        MultipartFile[] images = productDto.getImages();
+        for (MultipartFile image : images) {
+            String originalFilename = image.getOriginalFilename();
+            String submittedName = UUID.randomUUID()+"." + originalFilename.split(".")[1];
+            attachmentRepository.save(
+                    Attachment.builder()
+                            .product(product)
+                            .originalName(originalFilename)
+                            .submittedName(submittedName)
+                            .build()
+            );
+
+            Path path = Path.of(BASE_PATH);
+            Files.copy(image.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+        }
+
 
         return new ApiResponse(true,"Product saved successfully !!!");
     }
@@ -94,10 +123,6 @@ public class ProductService {
         }
         ProductEntity product = productOpt.get();
 
-        Integer count = productDto.getCount();
-        if (count != null){
-           product.setCount(count);
-        }
         String name = productDto.getName();
         if (name != null){
             product.setName(name);

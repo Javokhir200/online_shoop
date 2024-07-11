@@ -13,14 +13,9 @@ import uz.lee.onlineshoop.dto.user.UserDto;
 @Getter
 @Setter
 public class OrderDto {
-    private Long id;
-    private UserDto user;
-    private ProductDto product;
-    private String orderAt;
-    private String expireAt;
+    private Long productId;
     private AddressDto address;
     private Integer quantity;
-    private StatusDto status;
     private String totalPrice;
-    private PaymentMethodDto paymentMethod;
+    private Long paymentMethodId;
 }

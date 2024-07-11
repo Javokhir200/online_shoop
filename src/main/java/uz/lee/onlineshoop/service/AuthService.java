@@ -7,11 +7,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.resource.NoResourceFoundException;
 import uz.lee.onlineshoop.dto.ApiResponse;
 import uz.lee.onlineshoop.dto.auth.LoginDto;
 import uz.lee.onlineshoop.dto.auth.RegisterDto;
-import uz.lee.onlineshoop.entity.GenderEntity;
 import uz.lee.onlineshoop.exception.ResourceNotFoundException;
 import uz.lee.onlineshoop.repository.GenderRepository;
 import uz.lee.onlineshoop.repository.RoleEntityRepository;

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.lee.onlineshoop.dto.AttachmentDto;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +14,5 @@ public class UserDto {
     private String email;
     private String password;
     private String gender;
-    private AttachmentDto attachment;
     private String phoneNumber;
 }

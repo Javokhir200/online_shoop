@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.lee.onlineshoop.dto.AttachmentDto;
 
 @Getter
 @Setter
@@ -18,7 +17,6 @@ public class EditByUserDto {
     private String password;
 
     private Integer genderId;
-    private AttachmentDto attachment;
 
     private String cardNumber;
 
